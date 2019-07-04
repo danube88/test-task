@@ -66,4 +66,28 @@ class DataTableController extends Controller
             })*/
         ->make(true);
     }
+
+    public function position()
+    {
+        $positions = DB::table('positions as p')
+              ->select([
+                  'p.name_position as name',
+                  'p.default_salary as salary',
+              ]);
+
+        return DataTables::of($positions)
+            ->filterColumn('name', function ($query, $keyword) {
+                $query->whereRaw("p.name_position like ?", ["%$keyword%"]);
+            })
+            ->editColumn('salary', function ($position) {
+                return number_format($position->salary, 2, ',', ' ').' руб.';
+            })
+            ->filterColumn('salary', function ($query, $keyword) {
+                $query->whereRaw("p.default_salary like ?", ["%$keyword%"]);
+            })
+            /*->addColumn('action', function($employee) {
+                return '';
+            })*/
+        ->make(true);
+    }
 }

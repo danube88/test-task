@@ -18,5 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/positions', 'HomeController@position')->name('positions');
 
 Route::get('/employee/list','DataTableController@employee')->name('employeeList');
+
+Route::get('/position/list','DataTableController@position')->name('positionList');

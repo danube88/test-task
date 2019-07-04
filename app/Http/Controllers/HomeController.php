@@ -23,6 +23,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(view()->exists('home')){
+            return view('home');
+        } else {
+            abort(404);
+        }
+    }
+
+    public function position() {
+        if(view()->exists('position')){
+            return view('position');
+        } else {
+            abort(404);
+        }
     }
 }
